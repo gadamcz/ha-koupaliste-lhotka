@@ -1,0 +1,38 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 136" width="512" height="136">
+  <g transform="translate(0,4) scale(0.25)">
+  <defs>
+    <linearGradient id="A_sky" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#9FDDFB"/>
+      <stop offset="1" stop-color="#5EC0EE"/>
+    </linearGradient>
+    <linearGradient id="A_water" x1="0" y1="0" x2="0" y2="1">
+      <stop offset="0" stop-color="#1976D2"/>
+      <stop offset="1" stop-color="#0B3D91"/>
+    </linearGradient>
+    <clipPath id="A_r"><rect width="512" height="512" rx="112"/></clipPath>
+  </defs>
+  <g clip-path="url(#A_r)">
+    <rect width="512" height="512" fill="url(#A_sky)"/>
+
+    <!-- slunce: větší a výš, aby bylo znát i v malé velikosti -->
+    <circle cx="372" cy="132" r="66" fill="#FFC93C"/>
+
+    <!-- jeden výrazný kopec místo dvou drobných -->
+    <path d="M-20 300 L150 150 L322 300 Z" fill="#2E7D32"/>
+    <path d="M150 150 L322 300 L512 300 L512 232 L360 178 Z" fill="#43A047"/>
+
+    <!-- vodní plocha -->
+    <rect x="0" y="296" width="512" height="216" fill="url(#A_water)"/>
+
+    <!-- dvě silné vlny, dobře čitelné i na 24 px -->
+    <g fill="none" stroke="#CDE9FF" stroke-width="30" stroke-linecap="round">
+      <path d="M56 366 q50 -38 100 0 t100 0 t100 0 t100 0"/>
+      <path d="M56 452 q50 -38 100 0 t100 0 t100 0 t100 0" opacity="0.6"/>
+    </g>
+  </g>
+</g>
+  <text x="152" y="60" font-family="Lato, DejaVu Sans, sans-serif" font-size="42"
+        font-weight="700" fill="#0B3D91">Koupaliště</text>
+  <text x="152" y="108" font-family="Lato, DejaVu Sans, sans-serif" font-size="42"
+        font-weight="400" fill="#1976D2">Lhotka</text>
+</svg>
