@@ -1,0 +1,16 @@
+version: 2
+updates:
+  # Akce v CI stárnou nejrychleji — držíme je aktuální automaticky.
+  - package-ecosystem: github-actions
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "ci"
+
+  - package-ecosystem: pip
+    directory: "/"
+    schedule:
+      interval: monthly
+    commit-message:
+      prefix: "deps"

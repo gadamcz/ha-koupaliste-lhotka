@@ -1,0 +1,67 @@
+name: Hlášení chyby
+description: Něco nefunguje, jak má
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Díky za hlášení. Nejrychlejší cesta k opravě vede přes **diagnostiku**:
+        *Nastavení → Zařízení a služby → Koupaliště Lhotka → ⋮ → Stáhnout diagnostiku*.
+
+  - type: textarea
+    id: what-happened
+    attributes:
+      label: Co se děje
+      description: Co jsi čekal a co se místo toho stalo.
+    validations:
+      required: true
+
+  - type: input
+    id: version
+    attributes:
+      label: Verze integrace
+      placeholder: "2.0.0"
+    validations:
+      required: true
+
+  - type: input
+    id: ha-version
+    attributes:
+      label: Verze Home Assistantu
+      placeholder: "2026.7.0"
+    validations:
+      required: true
+
+  - type: dropdown
+    id: entity-state
+    attributes:
+      label: Co ukazuje sensor.lhotka_stav_dat
+      options:
+        - "ok"
+        - "potize"
+        - "nedostupne"
+        - "entita neexistuje / nevím"
+    validations:
+      required: true
+
+  - type: textarea
+    id: diagnostics
+    attributes:
+      label: Diagnostika
+      description: Přilož obsah stáhnutého JSON souboru (nebo soubor přetáhni do okna).
+      render: json
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Log
+      description: |
+        Řádky obsahující `koupaliste_lhotka`. Podrobný log zapneš přidáním
+        do `configuration.yaml`:
+
+        ```yaml
+        logger:
+          logs:
+            custom_components.koupaliste_lhotka: debug
+        ```
+      render: shell

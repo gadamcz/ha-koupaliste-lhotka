@@ -1,0 +1,27 @@
+name: Validate
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  schedule:
+    # Týdně — zachytí změny v pravidlech hassfest i HACS bez našeho zásahu.
+    - cron: "0 6 * * 1"
+  workflow_dispatch:
+
+jobs:
+  hassfest:
+    name: Hassfest (kontrola manifestu Home Assistantem)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: home-assistant/actions/hassfest@master
+
+  hacs:
+    name: HACS (kontrola struktury repozitáře)
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: hacs/action@main
+        with:
+          category: integration
