@@ -1,0 +1,52 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Lhotka Swimming Pool",
+        "description": "This integration reads publicly available data from koupaliste-lhotka.cz — water and air temperature, occupancy and opening hours. No login required."
+      }
+    },
+    "error": {
+      "cannot_connect": "Could not reach koupaliste-lhotka.cz. Check your internet connection and try again.",
+      "invalid_response": "The website responded but the expected data was not found. The page structure has probably changed — please open an issue."
+    },
+    "abort": {
+      "already_configured": "The integration is already set up."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Settings",
+        "description": "How often to read temperatures and occupancy. Opening hours are refreshed every 6 hours regardless of this setting.",
+        "data": {
+          "scan_interval_minutes": "Polling interval"
+        },
+        "data_description": {
+          "scan_interval_minutes": "10 minutes is recommended. Shorter intervals put load on a third-party website without providing fresher data."
+        }
+      }
+    }
+  },
+  "issues": {
+    "data_unreadable": {
+      "title": "Lhotka Swimming Pool: data cannot be read",
+      "description": "The last {attempts} attempts to read data from koupaliste-lhotka.cz failed.\n\nLast error: {error}\n\nThis is usually a temporary outage and the integration will recover on its own — the polling interval has been increased automatically in the meantime. If the problem persists for more than a day, check whether the website loads in your browser."
+    },
+    "parse_changed": {
+      "title": "Lhotka Swimming Pool: website structure changed",
+      "description": "koupaliste-lhotka.cz responds, but the integration did not find the expected data in the last {attempts} attempts.\n\nDetail: {error}\n\nThis means the pages were redesigned and the integration needs an update. Please open an issue on GitHub, ideally attaching the diagnostics download from this integration."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "lhotka_data_status": {
+        "state": {
+          "ok": "OK",
+          "potize": "Trouble reading",
+          "nedostupne": "Unavailable"
+        }
+      }
+    }
+  }
+}

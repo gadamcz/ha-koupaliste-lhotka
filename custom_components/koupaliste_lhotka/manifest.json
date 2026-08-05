@@ -1,0 +1,13 @@
+{
+  "domain": "koupaliste_lhotka",
+  "name": "Koupaliště Lhotka",
+  "codeowners": ["@gadamcz"],
+  "config_flow": true,
+  "documentation": "https://github.com/gadamcz/ha-koupaliste-lhotka",
+  "integration_type": "service",
+  "iot_class": "cloud_polling",
+  "issue_tracker": "https://github.com/gadamcz/ha-koupaliste-lhotka/issues",
+  "requirements": ["beautifulsoup4>=4.12.0"],
+  "single_config_entry": true,
+  "version": "2.0.1"
+}
