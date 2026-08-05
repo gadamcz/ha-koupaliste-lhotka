@@ -1,0 +1,52 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Koupaliště Lhotka",
+        "description": "Integrace bude číst veřejně dostupná data z webu koupaliste-lhotka.cz — teplotu vody a vzduchu, obsazenost a otevírací dobu. Není potřeba žádné přihlášení."
+      }
+    },
+    "error": {
+      "cannot_connect": "Web koupaliste-lhotka.cz se nepodařilo načíst. Zkontroluj připojení k internetu a zkus to znovu.",
+      "invalid_response": "Web odpověděl, ale očekávaná data v něm nejsou. Nejspíš se změnila struktura stránek — nahlas to prosím jako issue."
+    },
+    "abort": {
+      "already_configured": "Integrace je už nastavená."
+    }
+  },
+  "options": {
+    "step": {
+      "init": {
+        "title": "Nastavení",
+        "description": "Jak často se mají číst teploty a obsazenost. Otevírací doba se načítá jednou za 6 hodin nezávisle na tomto nastavení.",
+        "data": {
+          "scan_interval_minutes": "Interval čtení"
+        },
+        "data_description": {
+          "scan_interval_minutes": "Doporučeno 10 minut. Kratší interval zatěžuje cizí web a data se tak často nemění."
+        }
+      }
+    }
+  },
+  "issues": {
+    "data_unreadable": {
+      "title": "Koupaliště Lhotka: data se nedaří načíst",
+      "description": "Posledních {attempts} pokusů o načtení dat z koupaliste-lhotka.cz selhalo.\n\nPoslední chyba: {error}\n\nObvykle jde o dočasnou nedostupnost webu a integrace se sama zotaví — interval čtení se zatím automaticky prodloužil. Pokud problém trvá déle než den, zkontroluj, jestli je web dostupný z prohlížeče."
+    },
+    "parse_changed": {
+      "title": "Koupaliště Lhotka: změnila se struktura webu",
+      "description": "Web koupaliste-lhotka.cz odpovídá, ale integrace v něm posledních {attempts} pokusů nenašla očekávaná data.\n\nPodrobnost: {error}\n\nTo znamená, že se stránky přestavěly a integrace potřebuje aktualizaci. Nahlas to prosím jako issue na GitHubu — ideálně i s diagnostikou stáhnutou u této integrace."
+    }
+  },
+  "entity": {
+    "sensor": {
+      "lhotka_data_status": {
+        "state": {
+          "ok": "V pořádku",
+          "potize": "Potíže při čtení",
+          "nedostupne": "Nedostupné"
+        }
+      }
+    }
+  }
+}
