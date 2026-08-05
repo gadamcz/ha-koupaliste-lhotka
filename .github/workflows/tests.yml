@@ -1,0 +1,75 @@
+name: Tests
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+  workflow_dispatch:
+
+jobs:
+  lint-and-test:
+    name: Lint a testy
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.13"
+          cache: pip
+
+      - name: Instalace závislostí
+        run: |
+          python -m pip install --upgrade pip
+          pip install -r requirements-dev.txt
+
+      - name: Ruff (lint)
+        run: ruff check .
+
+      - name: Ruff (formát)
+        run: ruff format --check .
+
+      - name: Pytest
+        run: pytest -q
+
+  json:
+    name: Kontrola JSON souborů
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - name: Ověřit, že JSON soubory jsou platné
+        run: |
+          for f in $(find custom_components -name '*.json') hacs.json; do
+            python -c "import json,sys; json.load(open('$f', encoding='utf-8'))" \
+              && echo "ok: $f"
+          done
+
+      - name: Ověřit, že překlady mají stejné klíče jako strings.json
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          base = Path("custom_components/koupaliste_lhotka")
+
+          def keys(obj, prefix=""):
+              out = set()
+              if isinstance(obj, dict):
+                  for k, v in obj.items():
+                      out.add(f"{prefix}{k}")
+                      out |= keys(v, f"{prefix}{k}.")
+              return out
+
+          reference = keys(json.loads((base / "strings.json").read_text("utf-8")))
+          failed = False
+          for path in (base / "translations").glob("*.json"):
+              found = keys(json.loads(path.read_text("utf-8")))
+              missing = reference - found
+              extra = found - reference
+              if missing or extra:
+                  failed = True
+                  print(f"{path.name}: chybí {sorted(missing)}, přebývá {sorted(extra)}")
+              else:
+                  print(f"ok: {path.name}")
+          raise SystemExit(1 if failed else 0)
+          PY

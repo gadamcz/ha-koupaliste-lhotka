@@ -1,0 +1,26 @@
+name: Návrh na vylepšení
+description: Chybí ti nějaká entita nebo funkce
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: idea
+    attributes:
+      label: Co by integrace měla umět
+    validations:
+      required: true
+
+  - type: textarea
+    id: use-case
+    attributes:
+      label: K čemu to potřebuješ
+      description: |
+        Konkrétní použití (automatizace, karta na dashboardu) hodně pomůže
+        s návrhem podoby entity.
+    validations:
+      required: true
+
+  - type: input
+    id: source
+    attributes:
+      label: Kde jsou ta data na webu
+      description: Odkaz na stránku, kde je hodnota vidět (pokud jde o nová data).
